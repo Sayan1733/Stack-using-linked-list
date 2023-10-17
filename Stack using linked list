@@ -1,0 +1,77 @@
+#include <iostream>
+#include <stdlib.h>
+using namespace std;
+int i=0;
+struct node{
+    int data;
+    struct node* next;
+};
+struct node* top=NULL;
+void push(int val){
+    struct node* ptr;
+    ptr=(struct node*)malloc(sizeof(struct node));
+    ptr->data=val;
+    ptr->next=top;
+    top=ptr;
+    i++;
+}
+void pop(){
+    struct node* temp;
+    if(top==NULL){
+         cout<<"Stack underflow!"<<endl;
+    }
+    else{
+        temp=top;
+        top=temp->next;
+        cout<<"Popped element is: "<<temp->data<<endl;
+        delete temp;
+    }
+}
+void display(){
+    struct node* search;
+    if(top==NULL){
+        cout<<"Stack underflow!"<<endl;
+    }
+    else{
+        search=top;
+        while(search!=NULL){
+            cout<<search->data<<" ";
+            search=search->next;
+        }cout<<endl;
+    }
+}
+int main() {
+   int size,v,ch;
+   cout<<"Enter the size of the stack:";
+   cin>>size;
+   while(1){
+        cout<<"1.Push"<<" 2.Pop"<<" 3.Display"<<" 4.Exit"<<endl;
+        cout<<"Enter your choice:";
+        cin>>ch;
+        switch(ch){
+            case 1:
+                if(i==size){
+                    cout<<"Stack is overflow!"<<endl;
+                }
+                else{
+                    cout<<"Enter a data:";
+                    cin>>v;
+                    push(v);
+                }
+            break;
+            
+            case 2:
+                pop();
+            break;
+            
+            case 3:
+                display();
+            break;
+            
+            case 4:
+                exit(0);
+        }
+   }
+    
+    return 0;
+}
